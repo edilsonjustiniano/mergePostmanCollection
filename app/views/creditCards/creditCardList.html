@@ -1,0 +1,37 @@
+<div layout="column" flex>
+    <list-buttons buttons="buttons"></list-buttons>
+    <md-table-container class="mainTable">
+        <table md-table md-row-select ng-model="selected" class="mainTable">
+            <thead md-head md-order="query.order">
+                <tr md-row>
+                    <th md-column md-order-by="cards.bank" ng-click="onReorder('bank')"><span>Bank</span></th>
+                    <th md-column md-numeric md-order-by="cards.flag" ng-click="onReorder('flag')"><span>Flag</span></th>
+                    <th md-column md-numeric>Payment in</th>
+                    <th md-column md-numeric>Closing in</th>
+                    <th md-column md-numeric>Credit Card Number</th>
+                    <th md-column md-numeric colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-row md-select="card" md-select-id="{{card.name}}" md-auto-select ng-repeat="card in cardsToList | orderBy: query.order" ng-dblclick="edit(card)">
+                    <td md-cell>{{card.bank}}</td>
+                    <td md-cell>{{card.flag}}</td>
+                    <td md-cell>{{card.payDay | number: 0}}</td>
+                    <td md-cell>{{card.closeDay}}</td>
+                    <td md-cell>{{card.number}}</td>
+                    <td md-cell colspan="2">
+                        <span class="actionButtons">
+                            <md-icon md-svg-icon="images/icons/delete.svg" ng-click="delete(card)" title="Delete"></md-icon>
+                        </span>
+
+                        <span class="actionButtons">
+                            <md-icon md-svg-icon="images/icons/edit.svg" ng-click="edit(card)" title="Edit"></md-icon>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </md-table-container>
+
+    <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{cards.length}}" md-on-paginate="listCreditCards" md-page-select></md-table-pagination>
+</div>

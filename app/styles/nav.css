@@ -1,0 +1,14 @@
+.menuButton {
+    margin-right: 20px;
+    line-height: 15px !important;
+}
+.menuButton:first {
+    margin-right: 100px;
+}
+.menuButton > i {
+}
+.menuButton > span {
+    display: block;
+    text-align: center;
+    font-size: 15px;
+}

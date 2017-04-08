@@ -1,0 +1,14 @@
+<div layout="column">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span>{{menuBar.appTitle}}</span>
+            <!-- fill up the space between left and right area -->
+            <span flex="5"></span>
+
+            <md-button ui-sref="{{menu.state}}" class="menuButton" ng-repeat="menu in menuBar.buttons">
+                <i class="material-icons md-48">{{menu.icon}}</i>
+                {{menu.text}}
+            </md-button>
+        </div>
+    </md-toolbar>
+</div>

@@ -1,0 +1,6 @@
+# Back end modules
+node_modules
+
+
+# Front end modules
+app/vendors
