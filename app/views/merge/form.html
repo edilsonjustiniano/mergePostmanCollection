@@ -2,4 +2,4 @@
   <li ng-repeat="item in collections">{{ item }}</li>
 </ul>
 
-<md-button class="md-raised primary" ng-click="generateCollection()">Generate</md-button>
+<md-button ng-href="{{fileUrl}}" download="collection.json" class="md-raised primary" ng-click="generateCollection()">Generate</md-button>

@@ -8,9 +8,9 @@
 * Controller of the mergePostmanCollectionApp
 */
 angular.module('mergePostmanCollectionApp')
-.controller('MergeCtrl', ['$scope', '$mdDialog', '$mdToast', '$state', 'CollectionModel',
-function ($scope, $mdDialog, $mdToast, $state, CollectionModel) {
-
+.controller('MergeCtrl', ['$scope', '$mdDialog', '$mdToast', '$state', 'CollectionModel', '$window',
+function ($scope, $mdDialog, $mdToast, $state, CollectionModel, $window) {
+    
     $scope.findCollections = function() {
         CollectionModel.query(function(collections) {
             $scope.collections = collections;
@@ -21,13 +21,25 @@ function ($scope, $mdDialog, $mdToast, $state, CollectionModel) {
         CollectionModel.save($scope.collections, $scope.successfulyGeneratedCollection, $scope.errorToGenerateCollection);
     };
 
-    $scope.successfulyGeneratedCollection = function() {
+    $scope.successfulyGeneratedCollection = function(data) {
         $mdToast.show(
             $mdToast.simple()
             .textContent('New collection successfuly generated!')
             .position('bottom right')
         );
         $scope.findCollections();
+
+        //var data = "{name: 'Bob', occupation: 'Plumber'}";
+        var url = 'data:text/json;charset=utf8,' + encodeURIComponent(JSON.stringify(data.toJSON()));
+        window.open(url, '_blank');
+        window.focus();
+        /*
+        console.log(data.toJSON());
+
+        var blob = new Blob([data.toJSON()], { type: 'application/json' }),
+            url = $window.URL || $window.webkitURL;
+        $scope.fileUrl = url.createObjectURL(blob);
+        */
     };
 
     $scope.errorToGenerateCollection = function() {
@@ -36,7 +48,7 @@ function ($scope, $mdDialog, $mdToast, $state, CollectionModel) {
             .textContent('Error to generate collection!')
             .position('bottom right')
         );
-        $scope.findCollections();
+        //$scope.findCollections();
     };
 
     $scope.cancel = function() {
